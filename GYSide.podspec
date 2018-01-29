@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
 
   s.name         = "GYSide"
   s.version      = "0.0.1"
-  s.summary      = "A swift controller come out from side."
+  s.summary      = "A swift viewController extension ."
 
   # This description is used to generate tags and improve search results.
   #   * Think: What does it do? Why did you write it? What is the focus?
@@ -25,7 +25,7 @@ Pod::Spec.new do |s|
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
   s.description  = <<-DESC
-        一个让控制器具有以侧面平移或者缩放展示菜单控制器的扩展库
+        一个swift版的让控制器具有以侧面平移或者缩放展示菜单控制器的扩展库,菜单控制器在隐藏的时候会销毁,不会常驻在内存
                    DESC
 
   s.homepage     = "https://github.com/yuan-gao/GYSide"
