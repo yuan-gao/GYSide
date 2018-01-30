@@ -8,6 +8,163 @@
 
 import UIKit
 
-class GYSideAnimatedTransitioning: NSObject {
-
+enum GYSideShowType:Int {
+    case show,hidden
 }
+
+
+class GYSideAnimatedTransitioning: NSObject,UIViewControllerAnimatedTransitioning {
+    
+    var type:GYSideShowType!
+    var config:GYSideConfig!
+    
+    init(showType:GYSideShowType,config: GYSideConfig) {
+        super.init()
+        type = showType
+        self.config = config
+    }
+    
+    // 执行的动画时长
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
+        return config.timeInterval;
+    }
+    
+    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+        switch type {
+        case .show?:
+            animateTransitionShowType(transitionContext: transitionContext)
+            break
+        case .hidden?:
+            animateTransitionHiddenType(transitionContext: transitionContext)
+            break
+        default:
+            break
+        }
+    }
+    
+    // show
+    func animateTransitionShowType(transitionContext: UIViewControllerContextTransitioning) {
+        let fromController:UIViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from)!
+        let toController:UIViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to)!
+        let containerView = transitionContext.containerView
+        
+        let width:CGFloat = (UIApplication.shared.keyWindow?.bounds.size.width)! * self.config.sideRelative
+        
+        let x:CGFloat! = config.direction == .left ? 0.0 : ((UIApplication.shared.keyWindow?.bounds.size.width)! - width)
+        
+        toController.view.frame = CGRect.init(x: x, y: 0, width: width, height: containerView.frame.height)
+        
+        // fromController UINavigationController
+        // toController SnapKitViewController
+        containerView.addSubview(fromController.view)
+        containerView.addSubview(toController.view)
+        
+        let mask = GYSideMaskView.shared
+        mask.frame = fromController.view.bounds
+        fromController.view.addSubview(mask)
+        mask.alpha = 0.0
+        mask.isUserInteractionEnabled = false
+        
+        let flag: CGFloat! = config.direction == .left ? -1.0 : 1.0
+        
+        var fromTransform:CGAffineTransform = CGAffineTransform.init(translationX: -flag * width, y: 0)
+        let toTransform:CGAffineTransform = CGAffineTransform.init(translationX: flag * width, y: 0)
+        
+        if self.config.animationType == .translationPush {
+            
+        }else if self.config.animationType == .translationMask {
+            fromTransform = CGAffineTransform.init(translationX: 0, y: 0)
+        }else if self.config.animationType == .zoom {
+            let t1:CGAffineTransform = CGAffineTransform.init(translationX: -flag * width * config.zoomOffsetRelative, y: 0)
+            let t2:CGAffineTransform = CGAffineTransform.init(scaleX: config.zoomRelative, y: config.zoomRelative)
+            fromTransform = t1.concatenating(t2)
+        }
+        if self.config.animationType != .zoom {
+            toController.view.transform = toTransform
+            toController.view.frame = CGRect.init(x: toTransform.tx+x, y: 0, width: width, height: containerView.frame.height)
+        }else {
+            toController.view.transform = CGAffineTransform.init(translationX: 0, y: 0)
+            toController.view.frame = CGRect.init(x: 0, y: 0, width: width, height: containerView.frame.height)
+            containerView.bringSubview(toFront: fromController.view)
+            print("\(toController.view!)")
+        }
+        
+        
+        
+        UIView.animate(withDuration: self.transitionDuration(using: transitionContext), animations: {
+            mask.alpha = self.config.maskAlpha
+            toController.view.transform = .identity
+            fromController.view.transform = fromTransform
+        }) { (finished) in
+            if !transitionContext.transitionWasCancelled {
+                transitionContext.completeTransition(true)
+                mask.isUserInteractionEnabled = true
+                containerView.addSubview(fromController.view)
+                if self.config.animationType == .zoom {
+                    containerView.bringSubview(toFront: fromController.view)
+                }else {
+                    containerView.bringSubview(toFront: toController.view)
+                }
+            }else {
+                toController.view.transform = toTransform;
+                fromController.view.frame = containerView.frame;
+                transitionContext.completeTransition(false)
+            }
+        }
+    }
+    
+    // hidde
+    func animateTransitionHiddenType(transitionContext: UIViewControllerContextTransitioning) {
+        let fromController:UIViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from)!
+        let toController:UIViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to)!
+        
+        let containerView = transitionContext.containerView
+        let width:CGFloat = (UIApplication.shared.keyWindow?.bounds.size.width)! * self.config.sideRelative
+        let x:CGFloat! = config.direction == .left ? 0.0 : ((UIApplication.shared.keyWindow?.bounds.size.width)! - width)
+        
+        fromController.view.frame = CGRect.init(x: x, y: 0, width: width, height: containerView.frame.height)
+        
+        // fromController SnapKitViewController
+        // toController UINavigationController
+        
+        var mask:GYSideMaskView?
+        for view in toController.view.subviews {
+            if view.isKind(of: GYSideMaskView.classForCoder()){
+                mask = view as? GYSideMaskView
+                break
+            }
+        }
+        
+        let flag: CGFloat! = config.direction == GYSideDirection.left ? -1.0 : 1.0
+        var fromTransform:CGAffineTransform = CGAffineTransform.init(translationX: flag * width, y: 0)
+        
+        if self.config.animationType == .translationMask {
+            fromTransform = CGAffineTransform.init(translationX: flag * width, y: 0)
+        }else if self.config.animationType == .zoom {
+            fromTransform = CGAffineTransform.init(translationX: 0, y: 0)
+            containerView.bringSubview(toFront: toController.view)
+        }
+        
+        UIView.animate(withDuration: self.transitionDuration(using: transitionContext), animations: {
+            mask?.alpha = 0.001
+            fromController.view.transform = fromTransform
+            toController.view.transform = .identity
+        }) { (finished) in
+            if !transitionContext.transitionWasCancelled {
+                mask?.destroy()
+            }
+            
+            transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+            //            print(containerView.subviews)
+            //            print(containerView.superview)
+        }
+    }
+    
+    
+    deinit {
+        print( NSStringFromClass(self.classForCoder) + " 销毁了---->4")
+    }
+    
+    
+}
+

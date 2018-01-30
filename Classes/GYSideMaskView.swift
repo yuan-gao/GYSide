@@ -8,14 +8,37 @@
 
 import UIKit
 
-class GYSideMaskView: UIView {
+var single: GYSideMaskView?
+final class GYSideMaskView: UIView {
+    
+    static let shared: GYSideMaskView = {
+        single = GYSideMaskView()
+        //初始准备代码
+        single?.backgroundColor = UIColor.init(white: 0, alpha: 0.3)
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer.init(target: single, action: #selector(tapAction(_ :)))
+        single?.addGestureRecognizer(tap)
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+        let pan: UIPanGestureRecognizer = UIPanGestureRecognizer.init(target: single, action: #selector(panAction(_ :)))
+        single?.addGestureRecognizer(pan)
+
+        return single!
+    }();
+    
+    @objc private func tapAction(_ sender:UITapGestureRecognizer) {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue:GYSideTapNotification), object: nil)
     }
-    */
-
+    
+    @objc private func panAction(_ sender:UITapGestureRecognizer) {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue:GYSidePanNotification), object: sender)
+    }
+    
+    func destroy() {
+        single?.removeFromSuperview()
+        single = nil
+    }
+    
+    deinit {
+        print( NSStringFromClass(self.classForCoder) + " 销毁了---->2")
+    }
 }
+

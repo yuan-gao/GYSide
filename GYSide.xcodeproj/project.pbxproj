@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		302D801B201F452100FEB3A6 /* LeftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302D801A201F452100FEB3A6 /* LeftViewController.swift */; };
+		302D801D201F452B00FEB3A6 /* RightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302D801C201F452B00FEB3A6 /* RightViewController.swift */; };
 		304D62D0201ED39600382C72 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304D62CF201ED39600382C72 /* AppDelegate.swift */; };
 		304D62D2201ED39600382C72 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304D62D1201ED39600382C72 /* ViewController.swift */; };
 		304D62D5201ED39600382C72 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 304D62D3201ED39600382C72 /* Main.storyboard */; };
@@ -40,6 +42,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		302D801A201F452100FEB3A6 /* LeftViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftViewController.swift; sourceTree = "<group>"; };
+		302D801C201F452B00FEB3A6 /* RightViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightViewController.swift; sourceTree = "<group>"; };
 		304D62CC201ED39600382C72 /* GYSide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GYSide.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		304D62CF201ED39600382C72 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		304D62D1201ED39600382C72 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -112,6 +116,8 @@
 			children = (
 				304D62CF201ED39600382C72 /* AppDelegate.swift */,
 				304D62D1201ED39600382C72 /* ViewController.swift */,
+				302D801A201F452100FEB3A6 /* LeftViewController.swift */,
+				302D801C201F452B00FEB3A6 /* RightViewController.swift */,
 				304D62D3201ED39600382C72 /* Main.storyboard */,
 				304D62D6201ED39600382C72 /* Assets.xcassets */,
 				304D62D8201ED39600382C72 /* LaunchScreen.storyboard */,
@@ -291,6 +297,8 @@
 				304D62D2201ED39600382C72 /* ViewController.swift in Sources */,
 				304D62D0201ED39600382C72 /* AppDelegate.swift in Sources */,
 				304D6307201EE4C300382C72 /* GYSideAnimatedTransitioning.swift in Sources */,
+				302D801B201F452100FEB3A6 /* LeftViewController.swift in Sources */,
+				302D801D201F452B00FEB3A6 /* RightViewController.swift in Sources */,
 				304D62FF201EE46C00382C72 /* GYSide.swift in Sources */,
 				304D6305201EE4B000382C72 /* GYSideTransitioningDelegate.swift in Sources */,
 			);
