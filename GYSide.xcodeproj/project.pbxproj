@@ -22,6 +22,11 @@
 		304D6305201EE4B000382C72 /* GYSideTransitioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304D6304201EE4B000382C72 /* GYSideTransitioningDelegate.swift */; };
 		304D6307201EE4C300382C72 /* GYSideAnimatedTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304D6306201EE4C300382C72 /* GYSideAnimatedTransitioning.swift */; };
 		304D6309201EE4E200382C72 /* GYSidePercentInteractiveTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304D6308201EE4E200382C72 /* GYSidePercentInteractiveTransition.swift */; };
+		30E430B120216B57004FD2C8 /* 1.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 30E430AE20216B56004FD2C8 /* 1.jpeg */; };
+		30E430B220216B57004FD2C8 /* 2.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 30E430AF20216B56004FD2C8 /* 2.jpeg */; };
+		30E430B320216B57004FD2C8 /* 3.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 30E430B020216B56004FD2C8 /* 3.jpeg */; };
+		30E430B520216BE2004FD2C8 /* PresentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E430B420216BE2004FD2C8 /* PresentViewController.swift */; };
+		30E430B7202194A5004FD2C8 /* 4.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 30E430B6202194A5004FD2C8 /* 4.jpeg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +68,11 @@
 		304D6304201EE4B000382C72 /* GYSideTransitioningDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYSideTransitioningDelegate.swift; sourceTree = "<group>"; };
 		304D6306201EE4C300382C72 /* GYSideAnimatedTransitioning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYSideAnimatedTransitioning.swift; sourceTree = "<group>"; };
 		304D6308201EE4E200382C72 /* GYSidePercentInteractiveTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYSidePercentInteractiveTransition.swift; sourceTree = "<group>"; };
+		30E430AE20216B56004FD2C8 /* 1.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpeg; sourceTree = "<group>"; };
+		30E430AF20216B56004FD2C8 /* 2.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 2.jpeg; sourceTree = "<group>"; };
+		30E430B020216B56004FD2C8 /* 3.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 3.jpeg; sourceTree = "<group>"; };
+		30E430B420216BE2004FD2C8 /* PresentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentViewController.swift; sourceTree = "<group>"; };
+		30E430B6202194A5004FD2C8 /* 4.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 4.jpeg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,10 +124,12 @@
 		304D62CE201ED39600382C72 /* GYSide */ = {
 			isa = PBXGroup;
 			children = (
+				30E430AD20216B56004FD2C8 /* img */,
 				304D62CF201ED39600382C72 /* AppDelegate.swift */,
 				304D62D1201ED39600382C72 /* ViewController.swift */,
 				302D801A201F452100FEB3A6 /* LeftViewController.swift */,
 				302D801C201F452B00FEB3A6 /* RightViewController.swift */,
+				30E430B420216BE2004FD2C8 /* PresentViewController.swift */,
 				304D62D3201ED39600382C72 /* Main.storyboard */,
 				304D62D6201ED39600382C72 /* Assets.xcassets */,
 				304D62D8201ED39600382C72 /* LaunchScreen.storyboard */,
@@ -155,6 +167,17 @@
 				304D6308201EE4E200382C72 /* GYSidePercentInteractiveTransition.swift */,
 			);
 			path = Classes;
+			sourceTree = "<group>";
+		};
+		30E430AD20216B56004FD2C8 /* img */ = {
+			isa = PBXGroup;
+			children = (
+				30E430AE20216B56004FD2C8 /* 1.jpeg */,
+				30E430AF20216B56004FD2C8 /* 2.jpeg */,
+				30E430B020216B56004FD2C8 /* 3.jpeg */,
+				30E430B6202194A5004FD2C8 /* 4.jpeg */,
+			);
+			path = img;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -264,9 +287,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				30E430B220216B57004FD2C8 /* 2.jpeg in Resources */,
 				304D62DA201ED39600382C72 /* LaunchScreen.storyboard in Resources */,
 				304D62D7201ED39600382C72 /* Assets.xcassets in Resources */,
+				30E430B320216B57004FD2C8 /* 3.jpeg in Resources */,
+				30E430B7202194A5004FD2C8 /* 4.jpeg in Resources */,
 				304D62D5201ED39600382C72 /* Main.storyboard in Resources */,
+				30E430B120216B57004FD2C8 /* 1.jpeg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,6 +321,7 @@
 				304D6303201EE49E00382C72 /* GYSideMaskView.swift in Sources */,
 				304D6301201EE48600382C72 /* GYSideConfig.swift in Sources */,
 				304D6309201EE4E200382C72 /* GYSidePercentInteractiveTransition.swift in Sources */,
+				30E430B520216BE2004FD2C8 /* PresentViewController.swift in Sources */,
 				304D62D2201ED39600382C72 /* ViewController.swift in Sources */,
 				304D62D0201ED39600382C72 /* AppDelegate.swift in Sources */,
 				304D6307201EE4C300382C72 /* GYSideAnimatedTransitioning.swift in Sources */,
@@ -467,7 +495,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = XXN8KQ59T4;
 				INFOPLIST_FILE = GYSide/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gy.GYSide;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -481,7 +511,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = XXN8KQ59T4;
 				INFOPLIST_FILE = GYSide/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gy.GYSide;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -9,12 +9,14 @@
 import UIKit
 
 var single: GYSideMaskView?
-final class GYSideMaskView: UIView {
+final class GYSideMaskView: UIVisualEffectView {
     
     static let shared: GYSideMaskView = {
         single = GYSideMaskView()
+        single?.effect = UIBlurEffect.init(style: .dark)
+        
         //初始准备代码
-        single?.backgroundColor = UIColor.init(white: 0, alpha: 0.3)
+//        single?.backgroundColor = UIColor.init(white: 0, alpha: 0.3)
         let tap: UITapGestureRecognizer = UITapGestureRecognizer.init(target: single, action: #selector(tapAction(_ :)))
         single?.addGestureRecognizer(tap)
 

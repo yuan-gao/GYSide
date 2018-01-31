@@ -18,22 +18,29 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         // Do any additional setup after loading the view, typically from a nib.
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-    }
+   
     
     func configSubviews() {
-        self.title = "SwiftLearning"
+        
+        self.view.backgroundColor = UIColor.white
+        let imgView = UIImageView.init(frame: self.view.bounds)
+        imgView.image = UIImage.init(named: "4.jpeg")
+        self.view.addSubview(imgView)
+        
         let tableView:UITableView = UITableView.init(frame: self.view.bounds, style:UITableViewStyle(rawValue: 0)!)
+        tableView.backgroundView = imgView;
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView.init()
         tableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "id")
+        if #available(iOS 11.0, *) {
+//            tableView.contentInsetAdjustmentBehavior = .never
+        } else {
+            // Fallback on earlier versions
+        }
         self.view.addSubview(tableView)
         
 //        let vc = LeftViewController.init()
-        
 //        self.gy_registGestureShowSide { (direction) in
 //            if direction == .left {
 //                self.gy_showSide(configuration: { (config) in
@@ -54,6 +61,8 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "id")!
         cell.textLabel?.text = titleArray[indexPath.row]
+        cell.accessoryType = .disclosureIndicator;
+        
         return cell
     }
     
@@ -100,7 +109,6 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     deinit {
         print( NSStringFromClass(self.classForCoder) + " 销毁了")
     }
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -61,8 +61,6 @@ class GYSidePercentInteractiveTransition: UIPercentDrivenInteractiveTransition {
         
         switch pan.state {
         case .began:
-            //            print("------>begin \(String(describing: _direction))")
-            //             print("-->present \(x)")
             if x<0 {
                 _direction = .right;
             }else if x>=0 {
@@ -101,7 +99,6 @@ class GYSidePercentInteractiveTransition: UIPercentDrivenInteractiveTransition {
         default:
             break
         }
-        
     }
     
     @objc func handlePan(pan: UIPanGestureRecognizer)  {
@@ -114,9 +111,7 @@ class GYSidePercentInteractiveTransition: UIPercentDrivenInteractiveTransition {
         if _config.animationType == .zoom {
             width = kScreenWidth*(1.0 - _config.zoomOffsetRelative)
         }
-        
         var percent:CGFloat = 0.0
-        
         switch pan.state {
         case .began :
             isInteractive = true;

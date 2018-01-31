@@ -12,13 +12,12 @@ enum GYSideShowType:Int {
     case show,hidden
 }
 
-
 class GYSideAnimatedTransitioning: NSObject,UIViewControllerAnimatedTransitioning {
     
     var type:GYSideShowType!
     var config:GYSideConfig!
     
-    init(showType:GYSideShowType,config: GYSideConfig) {
+    init(showType: GYSideShowType,config: GYSideConfig) {
         super.init()
         type = showType
         self.config = config
@@ -44,20 +43,17 @@ class GYSideAnimatedTransitioning: NSObject,UIViewControllerAnimatedTransitionin
     
     // show
     func animateTransitionShowType(transitionContext: UIViewControllerContextTransitioning) {
-        let fromController:UIViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from)!
-        let toController:UIViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to)!
+        let fromController: UIViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from)!
+        let toController: UIViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to)!
         let containerView = transitionContext.containerView
-        
         let width:CGFloat = (UIApplication.shared.keyWindow?.bounds.size.width)! * self.config.sideRelative
-        
         let x:CGFloat! = config.direction == .left ? 0.0 : ((UIApplication.shared.keyWindow?.bounds.size.width)! - width)
-        
-        toController.view.frame = CGRect.init(x: x, y: 0, width: width, height: containerView.frame.height)
-        
+        toController.view.frame = CGRect.init(x: x, y: 0, width: containerView.frame.width, height: containerView.frame.height)
+        toController.view.clipsToBounds = true
         // fromController UINavigationController
         // toController SnapKitViewController
-        containerView.addSubview(fromController.view)
         containerView.addSubview(toController.view)
+        containerView.addSubview(fromController.view)
         
         let mask = GYSideMaskView.shared
         mask.frame = fromController.view.bounds
@@ -67,16 +63,15 @@ class GYSideAnimatedTransitioning: NSObject,UIViewControllerAnimatedTransitionin
         
         let flag: CGFloat! = config.direction == .left ? -1.0 : 1.0
         
-        var fromTransform:CGAffineTransform = CGAffineTransform.init(translationX: -flag * width, y: 0)
-        let toTransform:CGAffineTransform = CGAffineTransform.init(translationX: flag * width, y: 0)
+        var fromTransform: CGAffineTransform = CGAffineTransform.init(translationX: -flag * width, y: 0)
+        let toTransform: CGAffineTransform = CGAffineTransform.init(translationX: flag * width, y: 0)
         
-        if self.config.animationType == .translationPush {
-            
-        }else if self.config.animationType == .translationMask {
+        if self.config.animationType == .translationMask {
             fromTransform = CGAffineTransform.init(translationX: 0, y: 0)
+            containerView.bringSubview(toFront: toController.view)
         }else if self.config.animationType == .zoom {
-            let t1:CGAffineTransform = CGAffineTransform.init(translationX: -flag * width * config.zoomOffsetRelative, y: 0)
-            let t2:CGAffineTransform = CGAffineTransform.init(scaleX: config.zoomRelative, y: config.zoomRelative)
+            let t1: CGAffineTransform = CGAffineTransform.init(translationX: -flag * width * config.zoomOffsetRelative, y: 0)
+            let t2: CGAffineTransform = CGAffineTransform.init(scaleX: config.zoomRelative, y: config.zoomRelative)
             fromTransform = t1.concatenating(t2)
         }
         if self.config.animationType != .zoom {
@@ -85,11 +80,7 @@ class GYSideAnimatedTransitioning: NSObject,UIViewControllerAnimatedTransitionin
         }else {
             toController.view.transform = CGAffineTransform.init(translationX: 0, y: 0)
             toController.view.frame = CGRect.init(x: 0, y: 0, width: width, height: containerView.frame.height)
-            containerView.bringSubview(toFront: fromController.view)
-            print("\(toController.view!)")
         }
-        
-        
         
         UIView.animate(withDuration: self.transitionDuration(using: transitionContext), animations: {
             mask.alpha = self.config.maskAlpha
@@ -97,15 +88,14 @@ class GYSideAnimatedTransitioning: NSObject,UIViewControllerAnimatedTransitionin
             fromController.view.transform = fromTransform
         }) { (finished) in
             if !transitionContext.transitionWasCancelled {
-                transitionContext.completeTransition(true)
                 mask.isUserInteractionEnabled = true
+                transitionContext.completeTransition(true)
                 containerView.addSubview(fromController.view)
-                if self.config.animationType == .zoom {
-                    containerView.bringSubview(toFront: fromController.view)
-                }else {
+                if self.config.animationType == .translationMask {
                     containerView.bringSubview(toFront: toController.view)
                 }
             }else {
+                mask.destroy()
                 toController.view.transform = toTransform;
                 fromController.view.frame = containerView.frame;
                 transitionContext.completeTransition(false)
@@ -113,6 +103,7 @@ class GYSideAnimatedTransitioning: NSObject,UIViewControllerAnimatedTransitionin
         }
     }
     
+
     // hidde
     func animateTransitionHiddenType(transitionContext: UIViewControllerContextTransitioning) {
         let fromController:UIViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from)!
@@ -153,13 +144,9 @@ class GYSideAnimatedTransitioning: NSObject,UIViewControllerAnimatedTransitionin
             if !transitionContext.transitionWasCancelled {
                 mask?.destroy()
             }
-            
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
-            //            print(containerView.subviews)
-            //            print(containerView.superview)
         }
     }
-    
     
     deinit {
         print( NSStringFromClass(self.classForCoder) + " 销毁了---->4")

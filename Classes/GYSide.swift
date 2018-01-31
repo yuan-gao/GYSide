@@ -37,8 +37,7 @@ extension UIViewController {
         let dismissalInteractiveTransition = GYSidePercentInteractiveTransition(showType: .hidden, viewController:viewController, config: config)
         d.dismissalInteractiveTransition = dismissalInteractiveTransition
         viewController.transitioningDelegate = delegate as? UIViewControllerTransitioningDelegate
-        
-        
+
         DispatchQueue.main.async { //防止present延迟
             self.present(viewController, animated: true, completion: nil)
         }
@@ -59,5 +58,19 @@ extension UIViewController {
         objc_setAssociatedObject(self, &showControlelrTransitioningDelegateKey, delegate, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
     }
     
+    func gy_sidePushViewController(viewController: UIViewController) {
+        let rootVC: UIViewController = (UIApplication.shared.keyWindow?.rootViewController)!
+        var nav: UINavigationController?
+        if rootVC.isKind(of: UITabBarController.classForCoder()) {
+            let tabBar: UITabBarController = rootVC as! UITabBarController
+            nav = tabBar.selectedViewController as? UINavigationController
+        }else if rootVC.isKind(of: UINavigationController.classForCoder()) {
+            nav = rootVC as? UINavigationController
+        }else {
+            fatalError("没有UINavigationController")
+        }
+        self.dismiss(animated: true, completion: nil)
+        nav?.pushViewController(viewController, animated: false)
+    }
     
 }
