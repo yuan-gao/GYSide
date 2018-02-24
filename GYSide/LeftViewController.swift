@@ -26,7 +26,7 @@ class LeftViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     
     func configSubviews() {
         self.view.backgroundColor = UIColor.white
-        tableView = UITableView.init(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width*0.7, height: self.view.bounds.height) , style:UITableViewStyle(rawValue: 0)!)
+        tableView = UITableView.init(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: self.view.bounds.height) , style:UITableViewStyle(rawValue: 0)!)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView.init()
@@ -57,7 +57,7 @@ class LeftViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         switch indexPath.row {
         case 0:
             DispatchQueue.main.async {
-                self.gy_sidePresentController(viewController: PresentViewController())
+                self.gy_sidePresentViewController(viewController: PresentViewController())
             }
             break
         case 1:

@@ -55,6 +55,7 @@ public class GYSideConfig: NSObject {
     /// 侧边来出来的的方向 默认从左边出来
     public var direction:GYSideDirection! = .left
     
+    /// 侧边来出来的动画方式
     public var animationType:GYSideAnimationType! = .translationPush {
         didSet {
             if animationType == .zoom  {sideRelative = 1.0}

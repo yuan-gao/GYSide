@@ -77,7 +77,7 @@ extension UIViewController {
     /// 侧边栏调用present
     ///
     /// - Parameter viewController
-    public func gy_sidePresentController(viewController: UIViewController) {
+    public func gy_sidePresentViewController(viewController: UIViewController) {
         let rootVC: UIViewController = (UIApplication.shared.keyWindow?.rootViewController)!
         if ((rootVC.presentedViewController) != nil) {
             rootVC.presentedViewController?.dismiss(animated: true, completion: {
