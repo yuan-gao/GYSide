@@ -13,23 +13,20 @@ typealias completeShowGestureBlock = (GYSideDirection) -> ()
 class GYSidePercentInteractiveTransition: UIPercentDrivenInteractiveTransition {
     
     var completeShowGesture:completeShowGestureBlock?
-    var _showType:GYSideShowType!
+    var isInteractive:Bool! = false
     weak var _targetVC:UIViewController!
     var _config:GYSideConfig!
-    var isInteractive:Bool! = false
+    var _showType:GYSideShowType!
     private var _direction:GYSideDirection?
     private var _percent:CGFloat  = 0.0 //必须用全局的
-    private var _x:CGFloat  = 0.0 //用来记录手势 x 坐标，判断滑动方向
     
     init(showType:GYSideShowType,viewController:UIViewController?,config:GYSideConfig?) {
         super.init()
         _showType = showType
         _targetVC = viewController
         _config = config
-        
         NotificationCenter.default.addObserver(self, selector: #selector(gy_tapAction), name: NSNotification.Name(rawValue:GYSideTapNotification), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(gy_panAction(_ :)), name: NSNotification.Name(rawValue:GYSidePanNotification), object: nil)
-        
     }
     
     @objc func gy_tapAction() {
@@ -52,10 +49,7 @@ class GYSidePercentInteractiveTransition: UIPercentDrivenInteractiveTransition {
     
     //手势blcok 回调
     func handlePresentPan(pan:UIPanGestureRecognizer) {
-        
         var x:CGFloat = pan.translation(in: pan.view).x // -左划 +右滑
-        //        print("-->present \(x)")
-        
         let width:CGFloat = (pan.view!.bounds.width)
         var percent:CGFloat = 0.0
         
@@ -85,7 +79,6 @@ class GYSidePercentInteractiveTransition: UIPercentDrivenInteractiveTransition {
             break
         case .ended:
             isInteractive = false
-            //            print("percent = \(_percent)")
             if _percent < 0.5 {
                 self.cancel()
             }else {
@@ -131,7 +124,6 @@ class GYSidePercentInteractiveTransition: UIPercentDrivenInteractiveTransition {
             break
         case .ended:
             isInteractive = false
-            print("percent = \(_percent)")
             if _percent < 0.5 {
                 self.cancel()
             }else {
@@ -149,7 +141,7 @@ class GYSidePercentInteractiveTransition: UIPercentDrivenInteractiveTransition {
     
     deinit {
         NotificationCenter.default.removeObserver(self)
-        print( NSStringFromClass(self.classForCoder) + " 销毁了---->5")
+//        print( NSStringFromClass(self.classForCoder) + " 销毁了---->5")
     }
     
 }

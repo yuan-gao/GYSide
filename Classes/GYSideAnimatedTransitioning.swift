@@ -48,18 +48,27 @@ class GYSideAnimatedTransitioning: NSObject,UIViewControllerAnimatedTransitionin
         let containerView = transitionContext.containerView
         let width:CGFloat = (UIApplication.shared.keyWindow?.bounds.size.width)! * self.config.sideRelative
         let x:CGFloat! = config.direction == .left ? 0.0 : ((UIApplication.shared.keyWindow?.bounds.size.width)! - width)
-        toController.view.frame = CGRect.init(x: x, y: 0, width: containerView.frame.width, height: containerView.frame.height)
+        toController.view.frame = CGRect.init(x: x, y: 0, width: width, height: containerView.frame.height)
         toController.view.clipsToBounds = true
         // fromController UINavigationController
         // toController SnapKitViewController
         containerView.addSubview(toController.view)
         containerView.addSubview(fromController.view)
         
-        let mask = GYSideMaskView.shared
-        mask.frame = fromController.view.bounds
-        fromController.view.addSubview(mask)
-        mask.alpha = 0.0
-        mask.isUserInteractionEnabled = false
+        var mask:GYSideMaskView?
+        for view in toController.view.subviews {
+            if view.isKind(of: GYSideMaskView.classForCoder()){
+                mask = view as? GYSideMaskView
+                break
+            }
+        }
+        if mask == nil {
+            mask = GYSideMaskView()
+            fromController.view.addSubview(mask!)
+        }
+        mask?.frame = fromController.view.bounds
+        mask?.alpha = 0.0
+        mask?.isUserInteractionEnabled = false
         
         let flag: CGFloat! = config.direction == .left ? -1.0 : 1.0
         
@@ -83,19 +92,19 @@ class GYSideAnimatedTransitioning: NSObject,UIViewControllerAnimatedTransitionin
         }
         
         UIView.animate(withDuration: self.transitionDuration(using: transitionContext), animations: {
-            mask.alpha = self.config.maskAlpha
+            mask?.alpha = self.config.maskAlpha
             toController.view.transform = .identity
             fromController.view.transform = fromTransform
         }) { (finished) in
             if !transitionContext.transitionWasCancelled {
-                mask.isUserInteractionEnabled = true
+                mask?.isUserInteractionEnabled = true
                 transitionContext.completeTransition(true)
                 containerView.addSubview(fromController.view)
                 if self.config.animationType == .translationMask {
                     containerView.bringSubview(toFront: toController.view)
                 }
             }else {
-                mask.destroy()
+                mask?.destroy()
                 toController.view.transform = toTransform;
                 fromController.view.frame = containerView.frame;
                 transitionContext.completeTransition(false)
@@ -114,10 +123,7 @@ class GYSideAnimatedTransitioning: NSObject,UIViewControllerAnimatedTransitionin
         let x:CGFloat! = config.direction == .left ? 0.0 : ((UIApplication.shared.keyWindow?.bounds.size.width)! - width)
         
         fromController.view.frame = CGRect.init(x: x, y: 0, width: width, height: containerView.frame.height)
-        
-        // fromController SnapKitViewController
-        // toController UINavigationController
-        
+    
         var mask:GYSideMaskView?
         for view in toController.view.subviews {
             if view.isKind(of: GYSideMaskView.classForCoder()){
@@ -141,17 +147,19 @@ class GYSideAnimatedTransitioning: NSObject,UIViewControllerAnimatedTransitionin
             fromController.view.transform = fromTransform
             toController.view.transform = .identity
         }) { (finished) in
+            transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
             if !transitionContext.transitionWasCancelled {
                 mask?.destroy()
+            }else {
+                if self.config.animationType != .zoom {
+                    containerView.bringSubview(toFront: fromController.view)
+                }
             }
-            transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
         }
     }
     
     deinit {
-        print( NSStringFromClass(self.classForCoder) + " 销毁了---->4")
+//        print( NSStringFromClass(self.classForCoder) + " 销毁了---->4")
     }
-    
-    
 }
 

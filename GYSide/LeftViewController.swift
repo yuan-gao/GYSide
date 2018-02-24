@@ -21,7 +21,6 @@ class LeftViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
     }
     
     
@@ -58,9 +57,7 @@ class LeftViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         switch indexPath.row {
         case 0:
             DispatchQueue.main.async {
-                self.present(PresentViewController(), animated: true, completion: {
-//                    print("\(self.view.superview!)")
-                })
+                self.gy_sidePresentController(viewController: PresentViewController())
             }
             break
         case 1:

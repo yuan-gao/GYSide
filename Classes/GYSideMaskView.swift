@@ -8,23 +8,22 @@
 
 import UIKit
 
-var single: GYSideMaskView?
 final class GYSideMaskView: UIVisualEffectView {
-    
-    static let shared: GYSideMaskView = {
-        single = GYSideMaskView()
-        single?.effect = UIBlurEffect.init(style: .dark)
-        
+
+    init() {
+        super.init(effect: UIBlurEffect.init(style: .dark))
         //初始准备代码
-//        single?.backgroundColor = UIColor.init(white: 0, alpha: 0.3)
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer.init(target: single, action: #selector(tapAction(_ :)))
-        single?.addGestureRecognizer(tap)
-
-        let pan: UIPanGestureRecognizer = UIPanGestureRecognizer.init(target: single, action: #selector(panAction(_ :)))
-        single?.addGestureRecognizer(pan)
-
-        return single!
-    }();
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(tapAction(_ :)))
+        self.addGestureRecognizer(tap)
+        
+        let pan: UIPanGestureRecognizer = UIPanGestureRecognizer.init(target: self, action: #selector(panAction(_ :)))
+        self.addGestureRecognizer(pan)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     
     @objc private func tapAction(_ sender:UITapGestureRecognizer) {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue:GYSideTapNotification), object: nil)
@@ -35,12 +34,11 @@ final class GYSideMaskView: UIVisualEffectView {
     }
     
     func destroy() {
-        single?.removeFromSuperview()
-        single = nil
+        self.removeFromSuperview()
     }
     
     deinit {
-        print( NSStringFromClass(self.classForCoder) + " 销毁了---->2")
+//        print( NSStringFromClass(self.classForCoder) + " 销毁了---->2")
     }
 }
 

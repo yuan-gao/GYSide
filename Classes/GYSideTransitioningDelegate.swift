@@ -39,9 +39,8 @@ class GYSideTransitioningDelegate: NSObject,UIViewControllerTransitioningDelegat
     func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
         return dismissalInteractiveTransition.isInteractive ? dismissalInteractiveTransition : nil
     }
-    
     deinit {
-        print( NSStringFromClass(self.classForCoder) + " 销毁了---->3")
+//        print( NSStringFromClass(self.classForCoder) + " 销毁了---->3")
     }
     
 }
