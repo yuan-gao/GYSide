@@ -19,7 +19,6 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     }
     
    
-    
     func configSubviews() {
         
         self.view.backgroundColor = UIColor.white
@@ -27,18 +26,20 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         imgView.image = UIImage.init(named: "4.jpeg")
         self.view.addSubview(imgView)
         
-        let tableView:UITableView = UITableView.init(frame: self.view.bounds, style:UITableViewStyle(rawValue: 0)!)
+        let top = UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.bounds.height)!
+        
+        let tableView:UITableView = UITableView.init(frame: CGRect.init(x: 0, y: top, width: self.view.bounds.width, height: self.view.bounds.height-top), style:UITableViewStyle(rawValue: 0)!)
         tableView.backgroundView = imgView;
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView.init()
         tableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "id")
         if #available(iOS 11.0, *) {
-//            tableView.contentInsetAdjustmentBehavior = .never
-        } else {
-            // Fallback on earlier versions
+            tableView.contentInsetAdjustmentBehavior = .never
         }
         self.view.addSubview(tableView)
+        
+        
         
 //        let vc = LeftViewController.init()
 //        self.gy_registGestureShowSide { (direction) in
