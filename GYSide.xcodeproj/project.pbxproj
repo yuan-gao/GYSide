@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2AD9B9DAAD103EF086C7CB5B /* libPods-GYSide.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D6733BE7E1C13FEC0A013828 /* libPods-GYSide.a */; };
 		302D801B201F452100FEB3A6 /* LeftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302D801A201F452100FEB3A6 /* LeftViewController.swift */; };
 		302D801D201F452B00FEB3A6 /* RightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302D801C201F452B00FEB3A6 /* RightViewController.swift */; };
 		304D62D0201ED39600382C72 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304D62CF201ED39600382C72 /* AppDelegate.swift */; };
@@ -47,6 +48,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		24E9A488995AB60A68A3FBD6 /* Pods-GYSide.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GYSide.release.xcconfig"; path = "Target Support Files/Pods-GYSide/Pods-GYSide.release.xcconfig"; sourceTree = "<group>"; };
 		302D801A201F452100FEB3A6 /* LeftViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftViewController.swift; sourceTree = "<group>"; };
 		302D801C201F452B00FEB3A6 /* RightViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightViewController.swift; sourceTree = "<group>"; };
 		304D62CC201ED39600382C72 /* GYSide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GYSide.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -73,6 +75,8 @@
 		30E430B020216B56004FD2C8 /* 3.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 3.jpeg; sourceTree = "<group>"; };
 		30E430B420216BE2004FD2C8 /* PresentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentViewController.swift; sourceTree = "<group>"; };
 		30E430B6202194A5004FD2C8 /* 4.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 4.jpeg; sourceTree = "<group>"; };
+		D6733BE7E1C13FEC0A013828 /* libPods-GYSide.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GYSide.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DF01B1AEFCEFB861EECD7E28 /* Pods-GYSide.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GYSide.debug.xcconfig"; path = "Target Support Files/Pods-GYSide/Pods-GYSide.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2AD9B9DAAD103EF086C7CB5B /* libPods-GYSide.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,6 +113,8 @@
 				304D62E3201ED39600382C72 /* GYSideTests */,
 				304D62EE201ED39600382C72 /* GYSideUITests */,
 				304D62CD201ED39600382C72 /* Products */,
+				D07BCF0A90487ADFABC466E3 /* Pods */,
+				8D512778FCB0DDD44960AB50 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -180,6 +187,23 @@
 			path = img;
 			sourceTree = "<group>";
 		};
+		8D512778FCB0DDD44960AB50 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D6733BE7E1C13FEC0A013828 /* libPods-GYSide.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D07BCF0A90487ADFABC466E3 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DF01B1AEFCEFB861EECD7E28 /* Pods-GYSide.debug.xcconfig */,
+				24E9A488995AB60A68A3FBD6 /* Pods-GYSide.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -187,9 +211,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 304D62F4201ED39600382C72 /* Build configuration list for PBXNativeTarget "GYSide" */;
 			buildPhases = (
+				F3A4AD2620B230FFA6BED195 /* [CP] Check Pods Manifest.lock */,
 				304D62C8201ED39600382C72 /* Sources */,
 				304D62C9201ED39600382C72 /* Frameworks */,
 				304D62CA201ED39600382C72 /* Resources */,
+				D476355753B57FA11E329827 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -312,6 +338,49 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D476355753B57FA11E329827 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GYSide/Pods-GYSide-frameworks.sh",
+				"${PODS_ROOT}/LookinServer/LookinServer.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LookinServer.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GYSide/Pods-GYSide-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F3A4AD2620B230FFA6BED195 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-GYSide-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		304D62C8201ED39600382C72 /* Sources */ = {
@@ -492,10 +561,11 @@
 		};
 		304D62F5201ED39600382C72 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DF01B1AEFCEFB861EECD7E28 /* Pods-GYSide.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = XXN8KQ59T4;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = GYSide/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -508,10 +578,11 @@
 		};
 		304D62F6201ED39600382C72 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 24E9A488995AB60A68A3FBD6 /* Pods-GYSide.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = XXN8KQ59T4;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = GYSide/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

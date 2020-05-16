@@ -37,7 +37,7 @@ extension UIViewController {
         let dismissalInteractiveTransition = GYSidePercentInteractiveTransition(showType: .hidden, viewController:viewController, config: config)
         d.dismissalInteractiveTransition = dismissalInteractiveTransition
         viewController.transitioningDelegate = delegate as? UIViewControllerTransitioningDelegate
-
+        viewController.modalPresentationStyle = .fullScreen
         DispatchQueue.main.async { //防止present延迟
             self.present(viewController, animated: true, completion: nil)
         }
@@ -78,6 +78,7 @@ extension UIViewController {
     ///
     /// - Parameter viewController
     public func gy_sidePresentViewController(viewController: UIViewController) {
+        viewController.modalPresentationStyle = .fullScreen
         let rootVC: UIViewController = (UIApplication.shared.keyWindow?.rootViewController)!
         if ((rootVC.presentedViewController) != nil) {
             rootVC.presentedViewController?.dismiss(animated: true, completion: {
