@@ -20,14 +20,14 @@ extension UIViewController {
     /// - Parameters:
     ///   - configuration: 配置
     ///   - viewController: 将要展现的viewController
-    public func gy_showSide(configuration:(GYSideConfig)->(), viewController:UIViewController) {
+    public func gy_showSide(_ configuration:(GYSideConfig)->(), _ viewController:UIViewController) {
         
         let config = GYSideConfig()
         configuration(config)
         
         var delegate = objc_getAssociatedObject(self, &showControlelrTransitioningDelegateKey)
         if delegate == nil {
-            delegate = GYSideTransitioningDelegate(config:config)
+            delegate = GYSideTransitioningDelegate(config)
             objc_setAssociatedObject(viewController, &showControlelrTransitioningDelegateKey, delegate, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }else {
             let d = delegate as! GYSideTransitioningDelegate
@@ -48,7 +48,7 @@ extension UIViewController {
     ///
     /// - Parameter completeShowGesture: 侧边栏展示的方向
     public func gy_registGestureShowSide(completeShowGesture:@escaping (GYSideDirection)->()) {
-        let  delegate = GYSideTransitioningDelegate(config: nil)
+        let  delegate = GYSideTransitioningDelegate(nil)
         let presentationInteractiveTransition = GYSidePercentInteractiveTransition(showType: .show, viewController: nil, config: nil)
         presentationInteractiveTransition.addPanGesture(fromViewController: self)
         presentationInteractiveTransition.completeShowGesture = completeShowGesture
@@ -61,10 +61,11 @@ extension UIViewController {
     public func gy_sidePushViewController(viewController: UIViewController) {
         let rootVC: UIViewController = (UIApplication.shared.keyWindow?.rootViewController)!
         var nav: UINavigationController?
-        if rootVC.isKind(of: UITabBarController.classForCoder()) {
+        if rootVC is UITabBarController {
             let tabBar: UITabBarController = rootVC as! UITabBarController
+            viewController.hidesBottomBarWhenPushed = true
             nav = tabBar.selectedViewController as? UINavigationController
-        }else if rootVC.isKind(of: UINavigationController.classForCoder()) {
+        }else if rootVC is UINavigationController {
             nav = rootVC as? UINavigationController
         }else {
             fatalError("没有UINavigationController")

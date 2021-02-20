@@ -1,0 +1,5 @@
+
+target 'GYSideDemo' do
+   #pod 'LookinServer', :configurations => ['Debug']
+   pod 'GYSide', :path => '../'
+end

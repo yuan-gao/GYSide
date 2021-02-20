@@ -14,16 +14,16 @@ class GYSideTransitioningDelegate: NSObject,UIViewControllerTransitioningDelegat
     var dismissalInteractiveTransition: GYSidePercentInteractiveTransition!
     var config: GYSideConfig!
     
-    init(config:GYSideConfig?) {
+    init(_ config:GYSideConfig?) {
         self.config = config
     }
     
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return GYSideAnimatedTransitioning(showType: .show, config: config)
+        GYSideAnimatedTransitioning(showType: .show, config: config)
     }
     
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return GYSideAnimatedTransitioning(showType: .hidden, config: config)
+        GYSideAnimatedTransitioning(showType: .hidden, config: config)
     }
     
     // present交互的百分比

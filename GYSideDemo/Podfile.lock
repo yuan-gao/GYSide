@@ -1,0 +1,16 @@
+PODS:
+  - GYSide (0.0.4)
+
+DEPENDENCIES:
+  - GYSide (from `../`)
+
+EXTERNAL SOURCES:
+  GYSide:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  GYSide: b84a16d6cd66cc678f8f21b2f013ec5d9edc292f
+
+PODFILE CHECKSUM: 08b24ee9743b061d47013603c70c44ad776bb0dd
+
+COCOAPODS: 1.9.2

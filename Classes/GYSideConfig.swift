@@ -19,7 +19,7 @@ public enum GYSideDirection:Int {
     case right // 从右边出来
 }
 
-public class GYSideConfig: NSObject {
+public class GYSideConfig {
     
     /// 执行动画的时长 默认0.3
     public var timeInterval: TimeInterval! = 0.3

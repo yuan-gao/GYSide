@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "GYSide"
-  s.version      = "0.0.3"
+  s.version      = "0.0.5"
   s.summary      = "A swift viewController extension ."
 
   # This description is used to generate tags and improve search results.

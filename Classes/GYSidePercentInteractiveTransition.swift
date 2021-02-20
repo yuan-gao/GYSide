@@ -8,11 +8,11 @@
 
 import UIKit
 
-typealias completeShowGestureBlock = (GYSideDirection) -> ()
+typealias completeShowGestureTask = (GYSideDirection) -> ()
 
 class GYSidePercentInteractiveTransition: UIPercentDrivenInteractiveTransition {
     
-    var completeShowGesture:completeShowGestureBlock?
+    var completeShowGesture:completeShowGestureTask?
     var isInteractive:Bool! = false
     weak var _targetVC:UIViewController!
     var _config:GYSideConfig!
@@ -32,7 +32,7 @@ class GYSidePercentInteractiveTransition: UIPercentDrivenInteractiveTransition {
     @objc func gy_tapAction() {
         if _showType == .show {return}
         _targetVC?.dismiss(animated: true, completion: nil)
-        self.finish()
+        finish()
     }
     
     @objc func gy_panAction(_ sender:Notification) {
@@ -80,14 +80,14 @@ class GYSidePercentInteractiveTransition: UIPercentDrivenInteractiveTransition {
         case .ended:
             isInteractive = false
             if _percent < 0.5 {
-                self.cancel()
+                cancel()
             }else {
-                self.finish()
+                finish()
             }
             break
         case .cancelled:
             isInteractive = false
-            self.cancel()
+            cancel()
             break
         default:
             break
@@ -97,7 +97,7 @@ class GYSidePercentInteractiveTransition: UIPercentDrivenInteractiveTransition {
     @objc func handlePan(pan: UIPanGestureRecognizer)  {
         var x:CGFloat = pan.translation(in: pan.view).x // -左划 +右滑
         if _config == nil &&  _showType == .show{
-            self.handlePresentPan(pan: pan)
+            handlePresentPan(pan: pan)
             return
         }
         var width:CGFloat = (pan.view!.bounds.width) // 手势驱动时 相对移动的宽度
@@ -107,32 +107,32 @@ class GYSidePercentInteractiveTransition: UIPercentDrivenInteractiveTransition {
         var percent:CGFloat = 0.0
         switch pan.state {
         case .began :
-            isInteractive = true;
+            isInteractive = true
             _targetVC.dismiss(animated: true, completion: nil)
             break;
         case .changed:
             if _config.direction == GYSideDirection.left && _showType == .hidden {
-                x = x>0.0 ? 0.0:x;
+                x = x>0.0 ? 0.0:x
             }else {
-                x = x<0.0 ? 0.0:x;
+                x = x<0.0 ? 0.0:x
             }
             percent = CGFloat(fabsf(Float(x/width)))
             percent = percent<=0.0 ? 0.0:percent
             percent = percent>=1.0 ? 1.0:percent
             _percent = percent
-            self.update(percent)
+            update(percent)
             break
         case .ended:
             isInteractive = false
             if _percent < 0.5 {
-                self.cancel()
+                cancel()
             }else {
-                self.finish()
+                finish()
             }
             break
         case .cancelled:
             isInteractive = false
-            self.cancel()
+            cancel()
             break
         default:
             break
